@@ -1,7 +1,8 @@
 <?php
 session_start();
+
 $conn = new mysqli("localhost", "root", "", "marwadi_foods");
-$sql="SELECT oid1,pid,qtn,amt,odate FROM order1 WHERE email='".$_SESSION['var']."' GROUP BY odate";
+$sql="SELECT oid1,pid,totalamt,odate FROM order1 WHERE email='".$_SESSION['var']."' GROUP BY odate";
 $res=$conn->query($sql);
 if (!$res) {
 	echo"
@@ -40,10 +41,6 @@ if (!$res) {
 	</section>
 	<section>
 		<div class="container-fluid">
-			<div class="col-lg-12 text-center rounded bg-light my-5">
-				<h1>Order History</h1>
-			</div>
-
 			<div class="row">
 				<div class="col-lg-12">
 					<table class="table">
@@ -51,7 +48,7 @@ if (!$res) {
 							<tr>
 								<th scope="col">Order Id</th>
 								<th scope="col">Product Id<th>
-								<th scope="col">Quantity<th>
+								<!-- <th scope="col"><th> -->
 								<th scope="col">Price</th>
 								<th scope="col">Date & Time</th>
 							</tr>	
@@ -65,9 +62,7 @@ if (!$res) {
 										<td>$value[oid1]</td>
 										<td>$value[pid]</td>
 										<td></td>
-										<td>$value[qtn]</td>
-										<td></td>
-										<td>$value[amt]</td>
+										<td>$value[totalamt]</td>
 										<td>$value[odate]</td>
 									</tr>
 									";
